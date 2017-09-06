@@ -15,15 +15,20 @@ public class PlayerBehaviour : MonoBehaviour
     private bool onRunning;
     private bool canJump;
     public GameObject frisbee;
+    public Animation anim;
 
     void Start()
     {
         rigidBody = transform.GetComponent<Rigidbody>();
+        anim = GetComponent<Animation>();
 
         dir = Vector3.zero;
         onGround = true;
         onRunning = false;
         canJump = false;
+
+        anim["Run"].speed = 2.0f;
+        anim["Jump"].speed = 1.5f;
     }
 
     void FixedUpdate()
@@ -33,7 +38,10 @@ public class PlayerBehaviour : MonoBehaviour
             float amoutToMove = speed * Time.deltaTime;
             transform.Translate(dir * amoutToMove);
 
-            //Running animation
+            if (onGround)
+            {
+                rigidBody.GetComponent<Animation>().Play("Run");
+            }
         }
 
         rigidBody.AddForce(Physics.gravity * rigidBody.mass * 2.0f);
@@ -45,7 +53,7 @@ public class PlayerBehaviour : MonoBehaviour
                 rigidBody.velocity += jumpHeight * Vector3.up;
                 onGround = false;
 
-                //Jump animation
+                rigidBody.GetComponent<Animation>().Play("Jump");
             }
         }
     }
@@ -54,9 +62,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         dir = Vector3.left;
 
-        if (frisbee.transform.position.z < -9.9)
+        if (frisbee.transform.position.z > 14.9)
         {
-            if (frisbee.transform.position.z > -10)
+            if (frisbee.transform.position.z < 15)
             {
                 onRunning = true;
                 canJump = true;
@@ -99,6 +107,7 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     speed = 1.5f;
                     onRunning = false;
+                    this.GetComponent<Animation>().Play("Idle");
                 }
 
             }
@@ -107,7 +116,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Frisbee"))
         {
             Debug.Log("You win!");
-            Time.timeScale = 0;
+            SceneManager.LoadScene("Level1");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collectable"))
+        {
+            Destroy(other.gameObject);
         }
     }
 
