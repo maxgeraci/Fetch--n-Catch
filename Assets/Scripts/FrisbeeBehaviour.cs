@@ -15,11 +15,6 @@ public class FrisbeeBehaviour : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         dir = Vector3.forward;
 
         float amoutToMove = speed * Time.deltaTime;

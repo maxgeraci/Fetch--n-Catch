@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ProgressBar : MonoBehaviour
 {
+    public GameObject pauseScreen;
+    public GameObject tryAgainScreen;
+
     public GameObject platform;
     public GameObject progressBar;
 
@@ -35,21 +38,28 @@ public class ProgressBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         if (frisbee.transform.position.z > 0)
         {
             frisbeePercentagePosition = frisbee.transform.position.z / totalDistance * 100;
             frisbeeBall.transform.position = new Vector2((frisbeePercentagePosition / 100 * totalBallDistance) + (progressBar.transform.position.x - totalBallDistance / 2), frisbeeBall.transform.position.y);
         }
 
-        if (frisbee.transform.position.z > 14.9)
+        if (player.transform.position.z > 0.83)
         {
             playerPercentagePosition = player.transform.position.z / totalDistance * 100;
             playerBall.transform.position = new Vector2((playerPercentagePosition / 100 * totalBallDistance) + (progressBar.transform.position.x - totalBallDistance / 2), playerBall.transform.position.y);
         }
+
+        if (frisbee.transform.position.z > totalDistance)
+        {
+            Time.timeScale = 0;
+            tryAgainScreen.SetActive(true);
+        }
+    }
+
+    public void PauseOnClick()
+    {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
     }
 }

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels Park.unity
     guid: 09bf3d6ce0194a94ebc710e47e7303b0
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: ca7b18a72d55587408be6900168da0d6
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: b076733726a6d5b478d87db3a52fb682
   - enabled: 1

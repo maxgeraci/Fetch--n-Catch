@@ -2,11 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBehaviour : MonoBehaviour
 {
     Rigidbody rigidBody;
+
+    float timeLeft = 3f;
+    bool stopTimer = false;
+
+    int cookieCount;
+
+    public GameObject completedScreen;
+
+    public Image cookie1;
+    public Image cookie2;
+    public Image cookie3;
+
+    public Sprite noCookie;
+    public Sprite yesCookie;
 
     private Vector3 dir;
     public float speed;
@@ -27,12 +43,30 @@ public class PlayerBehaviour : MonoBehaviour
         onRunning = false;
         canJump = false;
 
-        anim["Run"].speed = 2.0f;
-        anim["Jump"].speed = 1.5f;
+        cookieCount = 0;
+
+        anim["Run"].speed = 2.1f;
+        anim["Jump"].speed = 1.7f;
+
+        Time.timeScale = 1;
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        dir = Vector3.left;
+
+        if (!stopTimer)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+        if (timeLeft < 0)
+        {
+            onRunning = true;
+            canJump = true;
+            timeLeft = 1;
+            stopTimer = true;
+        }
+
         if (onRunning)
         {
             float amoutToMove = speed * Time.deltaTime;
@@ -44,9 +78,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        rigidBody.AddForce(Physics.gravity * rigidBody.mass * 2.0f);
-
-        if (onGround && canJump)
+        if (onGround && canJump && !IsPointerOverUIObject())
         {
             if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
@@ -58,24 +90,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        dir = Vector3.left;
-
-        if (frisbee.transform.position.z > 14.9)
-        {
-            if (frisbee.transform.position.z < 15)
-            {
-                onRunning = true;
-                canJump = true;
-            }
-        }
-
-        //if (onRunning)
-        //{
-        //    float amoutToMove = speed * Time.deltaTime;
-        //    transform.Translate(dir * amoutToMove);
-        //}
+        rigidBody.AddForce(Physics.gravity * rigidBody.mass * 2.5f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -115,8 +132,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Frisbee"))
         {
-            Debug.Log("You win!");
-            SceneManager.LoadScene("Level1");
+            Time.timeScale = 0;
+            CookieCounter();
+            completedScreen.SetActive(true);
         }
     }
 
@@ -125,6 +143,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Collectable"))
         {
             Destroy(other.gameObject);
+            cookieCount++;
         }
     }
 
@@ -133,6 +152,41 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             onRunning = true;
+        }
+    }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+    public void CookieCounter()
+    {
+        if (cookieCount == 0)
+        {
+            cookie1.sprite = noCookie;
+            cookie2.sprite = noCookie;
+            cookie3.sprite = noCookie;
+        } else if (cookieCount == 1)
+        {
+            cookie1.sprite = yesCookie;
+            cookie2.sprite = noCookie;
+            cookie3.sprite = noCookie;
+        } else if (cookieCount == 2)
+        {
+            cookie1.sprite = yesCookie;
+            cookie2.sprite = yesCookie;
+            cookie3.sprite = noCookie;
+
+        } else if (cookieCount == 3)
+        {
+            cookie1.sprite = yesCookie;
+            cookie2.sprite = yesCookie;
+            cookie3.sprite = yesCookie;
         }
     }
 }
