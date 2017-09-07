@@ -28,9 +28,13 @@ public class ProgressBar : MonoBehaviour
     private float frisbeePosition;
     private float frisbeePercentagePosition;
 
+    public AudioClip clickSound;
+
     // Use this for initialization
     void Start()
     {
+        this.gameObject.AddComponent<AudioSource>();
+
         totalDistance = platform.GetComponent<Collider>().bounds.size.z;
         totalBallDistance = progressBar.GetComponent<Collider>().bounds.size.x;
     }
@@ -59,6 +63,8 @@ public class ProgressBar : MonoBehaviour
 
     public void PauseOnClick()
     {
+        this.GetComponent<AudioSource>().clip = clickSound;
+        this.GetComponent<AudioSource>().Play();
         Time.timeScale = 0;
         pauseScreen.SetActive(true);
     }

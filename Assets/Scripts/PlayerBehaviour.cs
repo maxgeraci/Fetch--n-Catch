@@ -16,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
     int cookieCount;
 
     public GameObject completedScreen;
+    public GameObject tryAgainScreen;
 
     public Image cookie1;
     public Image cookie2;
@@ -87,6 +88,17 @@ public class PlayerBehaviour : MonoBehaviour
 
                 rigidBody.GetComponent<Animation>().Play("Jump");
             }
+        }
+
+        if (this.transform.position.y < 0)
+        {
+            speed = 0;
+        }
+
+        if (this.transform.position.y < -3)
+        {
+            Time.timeScale = 0;
+            tryAgainScreen.SetActive(true);
         }
     }
 
