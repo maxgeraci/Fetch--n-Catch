@@ -10,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     Rigidbody rigidBody;
 
-    float timeLeft = 3f;
+    float timeLeft = 6f;
     bool stopTimer = false;
 
     int cookieCount;
@@ -33,6 +33,9 @@ public class PlayerBehaviour : MonoBehaviour
     private bool canJump;
     public GameObject frisbee;
     public Animation anim;
+
+    public Text countDown;
+    public int countDownInt;
 
     void Start()
     {
@@ -59,13 +62,16 @@ public class PlayerBehaviour : MonoBehaviour
         if (!stopTimer)
         {
             timeLeft -= Time.deltaTime;
+            countDownInt = (int)timeLeft;
+            countDown.text = countDownInt.ToString();
         }
-        if (timeLeft < 0)
+        if (timeLeft < 1)
         {
             onRunning = true;
             canJump = true;
             timeLeft = 1;
             stopTimer = true;
+            countDown.enabled = false;
         }
 
         if (onRunning)
@@ -128,13 +134,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            speed = 7;
+            speed = 9.4f;
             if (collision.contacts.Length > 0)
             {
                 ContactPoint contact = collision.contacts[0];
                 if (contact.normal.z < 0)
                 {
-                    speed = 1.5f;
+                    speed = 3f;
                     onRunning = false;
                     this.GetComponent<Animation>().Play("Idle");
                 }
