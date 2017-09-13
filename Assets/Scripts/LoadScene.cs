@@ -9,7 +9,8 @@ public class LoadScene : MonoBehaviour {
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(scene);
+        Initiate.Fade(scene, Color.white, 3.0f);
+        //SceneManager.LoadScene(scene);
     }
 
     public void LinkURL()
