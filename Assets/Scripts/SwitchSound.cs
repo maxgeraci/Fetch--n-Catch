@@ -9,21 +9,20 @@ public class SwitchSound : MonoBehaviour {
     public Sprite OnSprite;
     public Image image;
 
-    private string firstTime;
-
 	// Use this for initialization
 	void Start () {
         if (!PlayerPrefs.HasKey("Sound"))
         {
             PlayerPrefs.SetInt("Sound", 1);
-            //Make sound
-        } else if (PlayerPrefs.GetInt("Sound") == 1)
+            AudioListener.volume = 1;
+        }
+        else if (PlayerPrefs.GetInt("Sound") == 1)
         {
-            //Make sound
+            AudioListener.volume = 1;
             image.sprite = OnSprite;
         } else if (PlayerPrefs.GetInt("Sound") == 2)
         {
-            //Mute sound
+            AudioListener.volume = 0;
             image.sprite = OffSprite;
         }
 
@@ -40,12 +39,12 @@ public class SwitchSound : MonoBehaviour {
         {
             image.sprite = OffSprite;
             PlayerPrefs.SetInt("Sound", 2);
-            //Make sound
+            AudioListener.volume = 0;
         } else if (PlayerPrefs.GetInt("Sound") == 2)
         {
             image.sprite = OnSprite;
             PlayerPrefs.SetInt("Sound", 1);
-            //Mute sound
+            AudioListener.volume = 1;
         }
     }
 }

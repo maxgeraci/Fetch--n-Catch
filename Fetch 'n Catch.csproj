@@ -84,9 +84,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
     <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\CameraMenuBehaviour.cs" />
     <Compile Include="Assets\Scripts\FrisbeeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\LoadScreen.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />

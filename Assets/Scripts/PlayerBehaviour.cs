@@ -11,7 +11,8 @@ public class PlayerBehaviour : MonoBehaviour
     Rigidbody rigidBody;
 
     float timeLeft = 6f;
-    bool stopTimer = false;
+    float boostTime = 3f;
+    bool stopTimer;
 
     int cookieCount;
 
@@ -24,6 +25,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Sprite noCookie;
     public Sprite yesCookie;
+    public string nextLevel;
 
     private Vector3 dir;
     public float speed;
@@ -34,8 +36,15 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject frisbee;
     public Animation anim;
 
+    private bool boost;
+    private bool gameOver;
+
     public Text countDown;
     public int countDownInt;
+
+    public AudioClip cookieSound;
+    public AudioClip finishSound;
+    public AudioClip tryAgainSound;
 
     void Start()
     {
@@ -46,10 +55,15 @@ public class PlayerBehaviour : MonoBehaviour
         onGround = true;
         onRunning = false;
         canJump = false;
+        boost = false;
+
+        stopTimer = false;
+        gameOver = false;
 
         cookieCount = 0;
+        this.gameObject.AddComponent<AudioSource>();
 
-        anim["Run"].speed = 2.1f;
+        anim["Run"].speed = 2.5f;
         anim["Jump"].speed = 1.7f;
 
         Time.timeScale = 1;
@@ -89,10 +103,16 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
+                if (!boost)
+                {
+                    speed = 9.5f;
+                } else
+                {
+                    speed = 10.4f;
+                }
                 rigidBody.velocity += jumpHeight * Vector3.up;
-                onGround = false;
-
                 rigidBody.GetComponent<Animation>().Play("Jump");
+                onGround = false;
             }
         }
 
@@ -105,6 +125,26 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Time.timeScale = 0;
             tryAgainScreen.SetActive(true);
+            if (!gameOver)
+            {
+                this.GetComponent<AudioSource>().clip = tryAgainSound;
+                this.GetComponent<AudioSource>().volume = 0.7f;
+                this.GetComponent<AudioSource>().Play();
+                gameOver = true;
+            }
+        }
+
+        if (boost)
+        {
+            boostTime -= Time.deltaTime;
+        }
+
+        if (boostTime < 0)
+        {
+            boost = false;
+            boostTime = 3f;
+            speed = 9.5f;
+            anim["Run"].speed = 2.5f;
         }
     }
 
@@ -134,24 +174,43 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            speed = 9.4f;
+            if (!boost)
+            {
+                speed = 9.5f;
+                anim["Run"].speed = 2.5f;
+            }
+            else
+            {
+                speed = 10.4f;
+                anim["Run"].speed = 3.5f;
+            }
+
             if (collision.contacts.Length > 0)
             {
                 ContactPoint contact = collision.contacts[0];
                 if (contact.normal.z < 0)
                 {
-                    speed = 3f;
+                    if (!onGround)
+                    {
+                        speed = 0;
+                    } else
+                    {
+                        speed = 9.5f;
+                    }
                     onRunning = false;
                     this.GetComponent<Animation>().Play("Idle");
                 }
-
             }
         }
 
         if (collision.gameObject.CompareTag("Frisbee"))
         {
+            this.GetComponent<AudioSource>().clip = finishSound;
+            this.GetComponent<AudioSource>().volume = 0.4f;
+            this.GetComponent<AudioSource>().Play();
             Time.timeScale = 0;
             CookieCounter();
+            PlayerPrefs.SetInt(nextLevel, 2);
             completedScreen.SetActive(true);
         }
     }
@@ -161,7 +220,21 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Collectable"))
         {
             Destroy(other.gameObject);
+            this.GetComponent<AudioSource>().clip = cookieSound;
+            this.GetComponent<AudioSource>().volume = 0.6f;
+            this.GetComponent<AudioSource>().Play();
             cookieCount++;
+        }
+
+        if (other.gameObject.CompareTag("Boost"))
+        {
+            Destroy(other.gameObject);
+            this.GetComponent<AudioSource>().clip = cookieSound;
+            this.GetComponent<AudioSource>().volume = 0.6f;
+            this.GetComponent<AudioSource>().Play();
+            boost = true;
+            speed = 10.4f;
+            anim["Run"].speed = 3.5f;
         }
     }
 

@@ -11,4 +11,9 @@ public class LoadScene : MonoBehaviour {
     {
         SceneManager.LoadScene(scene);
     }
+
+    public void LinkURL()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.SpicyTuna");
+    }
 }
