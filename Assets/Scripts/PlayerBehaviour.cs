@@ -46,6 +46,9 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioClip finishSound;
     public AudioClip tryAgainSound;
 
+    private float startTouchPosition;
+    private float endTouchPosition;
+
     void Start()
     {
         rigidBody = transform.GetComponent<Rigidbody>();
@@ -103,16 +106,51 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
-                if (!boost)
-                {
-                    speed = 9.5f;
-                } else
-                {
-                    speed = 10.4f;
-                }
                 rigidBody.velocity += jumpHeight * Vector3.up;
                 rigidBody.GetComponent<Animation>().Play("Jump");
                 onGround = false;
+
+                if (!boost)
+                {
+                    speed = 9.5f;
+                    anim["Run"].speed = 2.5f;
+                }
+                else
+                {
+                    speed = 10.4f;
+                    anim["Run"].speed = 3.5f;
+                }
+            }
+
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch touch = Input.GetTouch(i);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    startTouchPosition = touch.position.y;
+                }
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    endTouchPosition = touch.position.y;
+                    if (endTouchPosition > startTouchPosition)
+                    {
+                        rigidBody.velocity += jumpHeight * Vector3.up;
+                        rigidBody.GetComponent<Animation>().Play("Jump");
+                        onGround = false;
+
+                        if (!boost)
+                        {
+                            speed = 9.5f;
+                            anim["Run"].speed = 2.5f;
+                        }
+                        else
+                        {
+                            speed = 10.4f;
+                            anim["Run"].speed = 3.5f;
+                        }
+                    }
+                }
+
             }
         }
 
@@ -196,6 +234,7 @@ public class PlayerBehaviour : MonoBehaviour
                     } else
                     {
                         speed = 9.5f;
+                        anim["Run"].speed = 2.5f;
                     }
                     onRunning = false;
                     this.GetComponent<Animation>().Play("Idle");
