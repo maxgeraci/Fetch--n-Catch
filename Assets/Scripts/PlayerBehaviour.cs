@@ -29,6 +29,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Vector3 dir;
     public float speed;
+    public float oldSpeed;
+    public float newSpeed;
     public float jumpHeight;
     private bool onGround;
     private bool onRunning;
@@ -48,9 +50,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float startTouchPosition;
     private float endTouchPosition;
-    private Vector2 startClickPosition;
-    private Vector2 endClickPosition;
-    private Vector2 currentSwipe;
+    private float startClickPosition;
+    private float endClickPosition;
 
     void Start()
     {
@@ -66,10 +67,12 @@ public class PlayerBehaviour : MonoBehaviour
         stopTimer = false;
         gameOver = false;
 
+        oldSpeed = 8;
+
         cookieCount = 0;
         this.gameObject.AddComponent<AudioSource>();
 
-        anim["Run"].speed = 2.5f;
+        anim["Run"].speed = 2f;
         anim["Jump"].speed = 1.7f;
 
         Time.timeScale = 1;
@@ -105,28 +108,34 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        //Click to Run
+        if (onGround && canJump && !IsPointerOverUIObject())
+        {
+            if (Input.GetMouseButtonDown(0) && newSpeed < 3)
+            {
+                newSpeed += 0.3f;
+                speed = oldSpeed + newSpeed;
+                anim["Run"].speed += 0.075f;
+            }
+
+            if (newSpeed > 0)
+            {
+                newSpeed -= 0.015f;
+                speed = oldSpeed + newSpeed;
+                anim["Run"].speed -= 0.00375f;
+            }
+        }
 
         if (onGround && canJump && !IsPointerOverUIObject())
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //save began touch 2d point
-                startClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                startClickPosition = Input.mousePosition.y;
             }
             if (Input.GetMouseButtonUp(0))
             {
-                //save ended touch 2d point
-                endClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                endClickPosition = Input.mousePosition.y;
 
-                //create vector from the two points
-                currentSwipe = new Vector2(endClickPosition.x - startClickPosition.x, endClickPosition.y - startClickPosition.y);
-
-                //normalize the 2d vector
-                currentSwipe.Normalize();
-
-                //swipe upwards
-                if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
+                if (endClickPosition - startClickPosition > Screen.height / 5)
                 {
                     rigidBody.velocity += jumpHeight * Vector3.up;
                     rigidBody.GetComponent<Animation>().Play("Jump");
@@ -155,7 +164,7 @@ public class PlayerBehaviour : MonoBehaviour
                 else if (touch.phase == TouchPhase.Moved)
                 {
                     endTouchPosition = touch.position.y;
-                    if (endTouchPosition > startTouchPosition)
+                    if (endTouchPosition - startTouchPosition > Screen.height / 5)
                     {
                         rigidBody.velocity += jumpHeight * Vector3.up;
                         rigidBody.GetComponent<Animation>().Play("Jump");
@@ -254,6 +263,9 @@ public class PlayerBehaviour : MonoBehaviour
                     if (!onGround)
                     {
                         speed = 0;
+                    } else
+                    {
+                        speed = oldSpeed + newSpeed;
                     }
                     onRunning = false;
                     this.GetComponent<Animation>().Play("Idle");
