@@ -11,7 +11,7 @@ public class PlayerBehaviour : MonoBehaviour
     Rigidbody rigidBody;
 
     float timeLeft = 6f;
-    float boostTime = 3f;
+    //float boostTime = 3f;
     bool stopTimer;
 
     int cookieCount;
@@ -36,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject frisbee;
     public Animation anim;
 
-    private bool boost;
+    //private bool boost;
     private bool gameOver;
 
     public Text countDown;
@@ -48,6 +48,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float startTouchPosition;
     private float endTouchPosition;
+    private Vector2 startClickPosition;
+    private Vector2 endClickPosition;
+    private Vector2 currentSwipe;
 
     void Start()
     {
@@ -58,7 +61,7 @@ public class PlayerBehaviour : MonoBehaviour
         onGround = true;
         onRunning = false;
         canJump = false;
-        boost = false;
+        //boost = false;
 
         stopTimer = false;
         gameOver = false;
@@ -102,27 +105,47 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
+        //Click to Run
+
         if (onGround && canJump && !IsPointerOverUIObject())
         {
-            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                rigidBody.velocity += jumpHeight * Vector3.up;
-                rigidBody.GetComponent<Animation>().Play("Jump");
-                onGround = false;
+                //save began touch 2d point
+                startClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                //save ended touch 2d point
+                endClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
-                if (!boost)
+                //create vector from the two points
+                currentSwipe = new Vector2(endClickPosition.x - startClickPosition.x, endClickPosition.y - startClickPosition.y);
+
+                //normalize the 2d vector
+                currentSwipe.Normalize();
+
+                //swipe upwards
+                if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
                 {
-                    speed = 9.5f;
-                    anim["Run"].speed = 2.5f;
-                }
-                else
-                {
-                    speed = 10.4f;
-                    anim["Run"].speed = 3.5f;
+                    rigidBody.velocity += jumpHeight * Vector3.up;
+                    rigidBody.GetComponent<Animation>().Play("Jump");
+                    onGround = false;
+
+                    //if (!boost)
+                    //{
+                    //    speed = 9.5f;
+                    //    anim["Run"].speed = 2.5f;
+                    //}
+                    //else
+                    //{
+                    //    speed = 10.4f;
+                    //    anim["Run"].speed = 3.5f;
+                    //}
                 }
             }
 
-            for (int i = 0; i < Input.touchCount; i++)
+                for (int i = 0; i < Input.touchCount; i++)
             {
                 Touch touch = Input.GetTouch(i);
                 if (touch.phase == TouchPhase.Began)
@@ -138,16 +161,16 @@ public class PlayerBehaviour : MonoBehaviour
                         rigidBody.GetComponent<Animation>().Play("Jump");
                         onGround = false;
 
-                        if (!boost)
-                        {
-                            speed = 9.5f;
-                            anim["Run"].speed = 2.5f;
-                        }
-                        else
-                        {
-                            speed = 10.4f;
-                            anim["Run"].speed = 3.5f;
-                        }
+                        //if (!boost)
+                        //{
+                        //    speed = 9.5f;
+                        //    anim["Run"].speed = 2.5f;
+                        //}
+                        //else
+                        //{
+                        //    speed = 10.4f;
+                        //    anim["Run"].speed = 3.5f;
+                        //}
                     }
                 }
 
@@ -172,18 +195,18 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        if (boost)
-        {
-            boostTime -= Time.deltaTime;
-        }
+        //if (boost)
+        //{
+        //    boostTime -= Time.deltaTime;
+        //}
 
-        if (boostTime < 0)
-        {
-            boost = false;
-            boostTime = 3f;
-            speed = 9.5f;
-            anim["Run"].speed = 2.5f;
-        }
+        //if (boostTime < 0)
+        //{
+        //    boost = false;
+        //    boostTime = 3f;
+        //    speed = 9.5f;
+        //    anim["Run"].speed = 2.5f;
+        //}
     }
 
     private void FixedUpdate()
@@ -212,16 +235,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            if (!boost)
-            {
-                speed = 9.5f;
-                anim["Run"].speed = 2.5f;
-            }
-            else
-            {
-                speed = 10.4f;
-                anim["Run"].speed = 3.5f;
-            }
+            //if (!boost)
+            //{
+            //    speed = 9.5f;
+            //    anim["Run"].speed = 2.5f;
+            //}
+            //else
+            //{
+            //    speed = 10.4f;
+            //    anim["Run"].speed = 3.5f;
+            //}
 
             if (collision.contacts.Length > 0)
             {
@@ -231,10 +254,6 @@ public class PlayerBehaviour : MonoBehaviour
                     if (!onGround)
                     {
                         speed = 0;
-                    } else
-                    {
-                        speed = 9.5f;
-                        anim["Run"].speed = 2.5f;
                     }
                     onRunning = false;
                     this.GetComponent<Animation>().Play("Idle");
@@ -265,16 +284,16 @@ public class PlayerBehaviour : MonoBehaviour
             cookieCount++;
         }
 
-        if (other.gameObject.CompareTag("Boost"))
-        {
-            Destroy(other.gameObject);
-            this.GetComponent<AudioSource>().clip = cookieSound;
-            this.GetComponent<AudioSource>().volume = 0.6f;
-            this.GetComponent<AudioSource>().Play();
-            boost = true;
-            speed = 10.4f;
-            anim["Run"].speed = 3.5f;
-        }
+        //if (other.gameObject.CompareTag("Boost"))
+        //{
+        //    Destroy(other.gameObject);
+        //    this.GetComponent<AudioSource>().clip = cookieSound;
+        //    this.GetComponent<AudioSource>().volume = 0.6f;
+        //    this.GetComponent<AudioSource>().Play();
+        //    boost = true;
+        //    speed = 10.4f;
+        //    anim["Run"].speed = 3.5f;
+        //}
     }
 
     private void OnCollisionExit(Collision collision)
