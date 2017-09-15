@@ -67,12 +67,12 @@ public class PlayerBehaviour : MonoBehaviour
         stopTimer = false;
         gameOver = false;
 
-        oldSpeed = 8;
+        oldSpeed = 0;
 
         cookieCount = 0;
         this.gameObject.AddComponent<AudioSource>();
 
-        anim["Run"].speed = 2f;
+        anim["Run"].speed = 0f;
         anim["Jump"].speed = 1.7f;
 
         Time.timeScale = 1;
@@ -102,28 +102,36 @@ public class PlayerBehaviour : MonoBehaviour
             float amoutToMove = speed * Time.deltaTime;
             transform.Translate(dir * amoutToMove);
 
-            if (onGround)
+            if (onGround && speed > 0)
             {
                 rigidBody.GetComponent<Animation>().Play("Run");
+            } else if(onGround && speed <= 0)
+            {
+                rigidBody.GetComponent<Animation>().Play("Idle");
             }
         }
+
+        Debug.Log(speed + " " + anim["Run"].speed);
 
         if (onGround && canJump && !IsPointerOverUIObject())
         {
-            if (Input.GetMouseButtonDown(0) && newSpeed < 3)
+            if (Input.GetMouseButtonDown(0) && speed < 11)
             {
-                newSpeed += 0.3f;
+                newSpeed += 1.5f;
                 speed = oldSpeed + newSpeed;
-                anim["Run"].speed += 0.075f;
             }
 
-            if (newSpeed > 0)
+            if (speed > 0)
             {
-                newSpeed -= 0.015f;
+                newSpeed -= 0.08f;
                 speed = oldSpeed + newSpeed;
-                anim["Run"].speed -= 0.00375f;
+            } else
+            {
+                speed = 0;
             }
         }
+
+        anim["Run"].speed = speed * 0.23f;
 
         if (onGround && canJump && !IsPointerOverUIObject())
         {
@@ -264,9 +272,12 @@ public class PlayerBehaviour : MonoBehaviour
                     if (!onGround)
                     {
                         speed = 0;
-                    } else
+                    } else if(onGround)
                     {
                         speed = oldSpeed + newSpeed;
+                    } else if(onGround && speed <= 0)
+                    {
+                        speed = 3;
                     }
                     onRunning = false;
                     this.GetComponent<Animation>().Play("Idle");
