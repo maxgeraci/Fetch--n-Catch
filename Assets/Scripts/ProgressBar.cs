@@ -61,8 +61,6 @@ public class ProgressBar : MonoBehaviour
 
         if (frisbee.transform.position.z > totalDistance)
         {
-            Time.timeScale = 0;
-            tryAgainScreen.SetActive(true);
             if (!gameOver)
             {
                 this.GetComponent<AudioSource>().clip = tryAgainSound;
@@ -70,6 +68,9 @@ public class ProgressBar : MonoBehaviour
                 this.GetComponent<AudioSource>().Play();
                 gameOver = true;
             }
+            player.SetActive(false);
+            frisbee.SetActive(false);
+            tryAgainScreen.SetActive(true);
         }
     }
 

@@ -10,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     Rigidbody rigidBody;
 
-    float timeLeft = 6f;
+    float timeLeft = 4f;
     //float boostTime = 3f;
     bool stopTimer;
 
@@ -193,8 +193,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (this.transform.position.y < -3)
         {
-            Time.timeScale = 0;
-            tryAgainScreen.SetActive(true);
             if (!gameOver)
             {
                 this.GetComponent<AudioSource>().clip = tryAgainSound;
@@ -202,6 +200,9 @@ public class PlayerBehaviour : MonoBehaviour
                 this.GetComponent<AudioSource>().Play();
                 gameOver = true;
             }
+            gameObject.SetActive(false);
+            frisbee.SetActive(false);
+            tryAgainScreen.SetActive(true);
         }
 
         //if (boost)
