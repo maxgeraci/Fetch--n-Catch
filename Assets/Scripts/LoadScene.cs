@@ -18,8 +18,8 @@ public class LoadScene : MonoBehaviour {
         //    SceneManager.LoadScene(scene);
         //}
 
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene);
-        
     }
 
     public void LinkURL()
