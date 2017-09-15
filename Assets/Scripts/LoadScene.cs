@@ -19,7 +19,8 @@ public class LoadScene : MonoBehaviour {
         //}
 
         Time.timeScale = 1;
-        SceneManager.LoadScene(scene);
+        //SceneManager.LoadScene(scene);
+        Initiate.Fade(scene, Color.white, 4.0f);
     }
 
     public void LinkURL()
