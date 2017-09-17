@@ -1131,7 +1131,7 @@ MonoBehaviour:
   playerBall: {fileID: 1831137965}
   frisbee: {fileID: 1501761347}
   frisbeeBall: {fileID: 1867786670}
-  tryAgainSound: {fileID: 8300000, guid: 4accdff2379e7b64697b3f159dc7027c, type: 3}
+  tryAgainSound: {fileID: 8300000, guid: 2961d704673a90f4c862652ba75edfc4, type: 3}
 --- !u!114 &466830992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3970,8 +3970,8 @@ MonoBehaviour:
   countDown: {fileID: 1282098390}
   countDownInt: 0
   cookieSound: {fileID: 8300000, guid: 5b86efb8522179940ac58d17e95ce5e5, type: 3}
-  finishSound: {fileID: 8300000, guid: 04adf3f088dbf2449b0b6b2cf944cf1f, type: 3}
-  tryAgainSound: {fileID: 8300000, guid: 4accdff2379e7b64697b3f159dc7027c, type: 3}
+  finishSound: {fileID: 8300000, guid: 2961d704673a90f4c862652ba75edfc4, type: 3}
+  tryAgainSound: {fileID: 8300000, guid: 2961d704673a90f4c862652ba75edfc4, type: 3}
 --- !u!65 &1470681838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4014,7 +4014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26152e5249f1c849a5ff83739c9d4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7.8
+  speed: 8.1
 --- !u!65 &1501761349
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4941,6 +4941,10 @@ Prefab:
     - target: {fileID: 100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
       propertyPath: m_TagString
       value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
