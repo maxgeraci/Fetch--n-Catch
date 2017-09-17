@@ -1505,9 +1505,9 @@ GameObject:
   - component: {fileID: 1173799469}
   - component: {fileID: 1173799473}
   - component: {fileID: 1173799472}
-  - component: {fileID: 1173799471}
   - component: {fileID: 1173799470}
   - component: {fileID: 1173799474}
+  - component: {fileID: 1173799471}
   m_Layer: 5
   m_Name: Level 1
   m_TagString: Untagged
@@ -1550,7 +1550,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1173799471}
-          m_MethodName: LoadNextLevel
+          m_MethodName: LoadNextScene
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1571,13 +1571,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173799468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51dc98245f6e2564184d62a440b1a794, type: 3}
+  m_Script: {fileID: 11500000, guid: c1f733b896d396449b0c4262d855f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unLocked: {fileID: 21300000, guid: 05aeb368da0b71c48b43e3957c71b27a, type: 3}
-  locked: {fileID: 21300000, guid: 6df4d45a08854944b83835b1e4fad7e6, type: 3}
-  image: {fileID: 1173799472}
-  level: Level1
+  scene: Tutorial
 --- !u!114 &1173799472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1597,7 +1594,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6df4d45a08854944b83835b1e4fad7e6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 05aeb368da0b71c48b43e3957c71b27a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

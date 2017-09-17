@@ -111,8 +111,6 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        Debug.Log(speed + " " + anim["Run"].speed);
-
         if (onGround && canJump && !IsPointerOverUIObject())
         {
             if (Input.GetMouseButtonDown(0) && speed < 11)
