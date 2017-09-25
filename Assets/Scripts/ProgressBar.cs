@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour
 {
     public GameObject pauseScreen;
@@ -19,6 +19,11 @@ public class ProgressBar : MonoBehaviour
     private float playerBallSpeed;
     private float frisbeeSpeed;
     private float frisbeeBallSpeed;
+
+    public Text timer;
+    public float startTime;
+    public int timerInt;
+    bool stopTimer;
 
     private float totalDistance;
     private float totalBallDistance;

@@ -11,8 +11,10 @@ public class PlayerBehaviour : MonoBehaviour
     Rigidbody rigidBody;
 
     float timeLeft = 4f;
+    float startTime;
     //float boostTime = 3f;
     bool stopTimer;
+    bool stopTimerUI;
 
     int cookieCount;
 
@@ -42,7 +44,10 @@ public class PlayerBehaviour : MonoBehaviour
     private bool gameOver;
 
     public Text countDown;
-    public int countDownInt;
+    private int countDownInt;
+
+    public Text timer;
+    private int timerInt;
 
     public AudioClip cookieSound;
     public AudioClip finishSound;
@@ -65,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviour
         //boost = false;
 
         stopTimer = false;
+        stopTimerUI = true;
         gameOver = false;
 
         oldSpeed = 0;
@@ -94,7 +100,15 @@ public class PlayerBehaviour : MonoBehaviour
             canJump = true;
             timeLeft = 1;
             stopTimer = true;
+            stopTimerUI = false;
             countDown.enabled = false;
+        }
+
+        if (!stopTimerUI)
+        {
+            startTime += Time.deltaTime;
+            timerInt = (int)startTime;
+            timer.text = timerInt.ToString();
         }
 
         if (onRunning)
@@ -121,7 +135,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             if (speed > 0)
             {
-                newSpeed -= 0.08f;
+                newSpeed -= 0.06f;
                 speed = oldSpeed + newSpeed;
             } else
             {
@@ -133,32 +147,32 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (onGround && canJump && !IsPointerOverUIObject())
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                startClickPosition = Input.mousePosition.y;
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                endClickPosition = Input.mousePosition.y;
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    startClickPosition = Input.mousePosition.y;
+            //}
+            //if (Input.GetMouseButtonUp(0))
+            //{
+            //    endClickPosition = Input.mousePosition.y;
 
-                if (endClickPosition - startClickPosition > Screen.height / 5)
-                {
-                    rigidBody.velocity += jumpHeight * Vector3.up;
-                    rigidBody.GetComponent<Animation>().Play("Jump");
-                    onGround = false;
+            //    if (endClickPosition - startClickPosition > Screen.height / 8)
+            //    {
+            //        rigidBody.velocity += jumpHeight * Vector3.up;
+            //        rigidBody.GetComponent<Animation>().Play("Jump");
+            //        onGround = false;
 
-                    //if (!boost)
-                    //{
-                    //    speed = 9.5f;
-                    //    anim["Run"].speed = 2.5f;
-                    //}
-                    //else
-                    //{
-                    //    speed = 10.4f;
-                    //    anim["Run"].speed = 3.5f;
-                    //}
-                }
-            }
+            //        //if (!boost)
+            //        //{
+            //        //    speed = 9.5f;
+            //        //    anim["Run"].speed = 2.5f;
+            //        //}
+            //        //else
+            //        //{
+            //        //    speed = 10.4f;
+            //        //    anim["Run"].speed = 3.5f;
+            //        //}
+            //    }
+            //}
 
                 for (int i = 0; i < Input.touchCount; i++)
             {
@@ -170,7 +184,7 @@ public class PlayerBehaviour : MonoBehaviour
                 else if (touch.phase == TouchPhase.Moved)
                 {
                     endTouchPosition = touch.position.y;
-                    if (endTouchPosition - startTouchPosition > Screen.height / 5)
+                    if (endTouchPosition - startTouchPosition > Screen.height / 8)
                     {
                         rigidBody.velocity += jumpHeight * Vector3.up;
                         rigidBody.GetComponent<Animation>().Play("Jump");

@@ -11,6 +11,7 @@ TagManager:
   - Boost
   - Background Music
   - Canvas
+  - Invisible
   layers:
   - Default
   - TransparentFX

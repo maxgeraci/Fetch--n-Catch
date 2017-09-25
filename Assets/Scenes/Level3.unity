@@ -209,7 +209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -53.55}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 477.3, y: 57.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44263053
@@ -784,7 +784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &377453868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1123,8 +1123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6709e14489c57e745857443e2c241cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseScreen: {fileID: 0}
-  tryAgainScreen: {fileID: 0}
+  pauseScreen: {fileID: 707612986}
+  tryAgainScreen: {fileID: 1690750113}
   platform: {fileID: 568282613}
   progressBar: {fileID: 466830989}
   player: {fileID: 1470681836}
@@ -1800,7 +1800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &646422350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4014,7 +4014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26152e5249f1c849a5ff83739c9d4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8.1
+  speed: 7.9
 --- !u!65 &1501761349
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5031,7 +5031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2113807729
 RectTransform:
   m_ObjectHideFlags: 0
