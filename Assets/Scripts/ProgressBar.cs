@@ -10,20 +10,11 @@ public class ProgressBar : MonoBehaviour
     public GameObject platform;
     public GameObject progressBar;
 
-    public GameObject player;
-    public GameObject playerBall;
     public GameObject frisbee;
     public GameObject frisbeeBall;
 
-    private float playerSpeed;
-    private float playerBallSpeed;
     private float frisbeeSpeed;
     private float frisbeeBallSpeed;
-
-    public Text timer;
-    public float startTime;
-    public int timerInt;
-    bool stopTimer;
 
     private float totalDistance;
     private float totalBallDistance;
@@ -58,12 +49,6 @@ public class ProgressBar : MonoBehaviour
             frisbeeBall.transform.position = new Vector2((frisbeePercentagePosition / 100 * totalBallDistance) + (progressBar.transform.position.x - totalBallDistance / 2), frisbeeBall.transform.position.y);
         }
 
-        if (player.transform.position.z > 0.83)
-        {
-            playerPercentagePosition = player.transform.position.z / totalDistance * 100;
-            playerBall.transform.position = new Vector2((playerPercentagePosition / 100 * totalBallDistance) + (progressBar.transform.position.x - totalBallDistance / 2), playerBall.transform.position.y);
-        }
-
         if (frisbee.transform.position.z > totalDistance)
         {
             if (!gameOver)
@@ -73,7 +58,6 @@ public class ProgressBar : MonoBehaviour
                 this.GetComponent<AudioSource>().Play();
                 gameOver = true;
             }
-            player.SetActive(false);
             frisbee.SetActive(false);
             tryAgainScreen.SetActive(true);
         }

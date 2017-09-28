@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject frisbee;
     public Animation anim;
 
-    //private bool boost;
+    private bool boost;
     private bool gameOver;
 
     public Text countDown;
@@ -67,7 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
         onGround = true;
         onRunning = false;
         canJump = false;
-        //boost = false;
+        boost = false;
 
         stopTimer = false;
         stopTimerUI = true;
@@ -108,7 +108,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             startTime += Time.deltaTime;
             timerInt = (int)startTime;
-            timer.text = timerInt.ToString();
+            float minutes = Mathf.Floor(timerInt / 60F);
+            float seconds = Mathf.Floor(timerInt - minutes * 60);
+            string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+            timer.text = niceTime;
         }
 
         if (onRunning)
@@ -119,92 +122,22 @@ public class PlayerBehaviour : MonoBehaviour
             if (onGround && speed > 0)
             {
                 rigidBody.GetComponent<Animation>().Play("Run");
-            } else if(onGround && speed <= 0)
+            } else if (onGround && speed <= 0)
             {
                 rigidBody.GetComponent<Animation>().Play("Idle");
             }
         }
 
-        if (onGround && canJump && !IsPointerOverUIObject())
+        if (speed > 0)
         {
-            if (Input.GetMouseButtonDown(0) && speed < 11)
-            {
-                newSpeed += 1.5f;
-                speed = oldSpeed + newSpeed;
-            }
-
-            if (speed > 0)
-            {
-                newSpeed -= 0.06f;
-                speed = oldSpeed + newSpeed;
-            } else
-            {
-                speed = 0;
-            }
+            newSpeed -= 0.06f;
+            speed = oldSpeed + newSpeed;
+        } else
+        {
+            speed = 0;
         }
 
         anim["Run"].speed = speed * 0.23f;
-
-        if (onGround && canJump && !IsPointerOverUIObject())
-        {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    startClickPosition = Input.mousePosition.y;
-            //}
-            //if (Input.GetMouseButtonUp(0))
-            //{
-            //    endClickPosition = Input.mousePosition.y;
-
-            //    if (endClickPosition - startClickPosition > Screen.height / 8)
-            //    {
-            //        rigidBody.velocity += jumpHeight * Vector3.up;
-            //        rigidBody.GetComponent<Animation>().Play("Jump");
-            //        onGround = false;
-
-            //        //if (!boost)
-            //        //{
-            //        //    speed = 9.5f;
-            //        //    anim["Run"].speed = 2.5f;
-            //        //}
-            //        //else
-            //        //{
-            //        //    speed = 10.4f;
-            //        //    anim["Run"].speed = 3.5f;
-            //        //}
-            //    }
-            //}
-
-                for (int i = 0; i < Input.touchCount; i++)
-            {
-                Touch touch = Input.GetTouch(i);
-                if (touch.phase == TouchPhase.Began)
-                {
-                    startTouchPosition = touch.position.y;
-                }
-                else if (touch.phase == TouchPhase.Moved)
-                {
-                    endTouchPosition = touch.position.y;
-                    if (endTouchPosition - startTouchPosition > Screen.height / 8)
-                    {
-                        rigidBody.velocity += jumpHeight * Vector3.up;
-                        rigidBody.GetComponent<Animation>().Play("Jump");
-                        onGround = false;
-
-                        //if (!boost)
-                        //{
-                        //    speed = 9.5f;
-                        //    anim["Run"].speed = 2.5f;
-                        //}
-                        //else
-                        //{
-                        //    speed = 10.4f;
-                        //    anim["Run"].speed = 3.5f;
-                        //}
-                    }
-                }
-
-            }
-        }
 
         if (this.transform.position.y < 0)
         {
@@ -242,6 +175,36 @@ public class PlayerBehaviour : MonoBehaviour
     private void FixedUpdate()
     {
         rigidBody.AddForce(Physics.gravity * rigidBody.mass * 2.5f);
+    }
+
+    public void Run()
+    {
+        if (onGround && canJump && speed < 11)
+        {
+            newSpeed += 1.5f;
+            speed = oldSpeed + newSpeed;
+        }
+    }
+
+    public void Jump()
+    {
+        if (onGround && canJump)
+        {
+            rigidBody.velocity += jumpHeight * Vector3.up;
+            rigidBody.GetComponent<Animation>().Play("Jump");
+            onGround = false;
+
+            if (!boost)
+            {
+                speed = 9.5f;
+                anim["Run"].speed = 2.5f;
+            }
+            else
+            {
+                speed = 10.4f;
+                anim["Run"].speed = 3.5f;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
