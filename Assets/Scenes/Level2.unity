@@ -955,7 +955,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
       propertyPath: m_Name
@@ -1949,12 +1949,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   completedScreen: {fileID: 1225088542}
   tryAgainScreen: {fileID: 757690782}
-  cookie1: {fileID: 1742869376}
-  cookie2: {fileID: 1948989915}
-  cookie3: {fileID: 1047203076}
+  starTime1: 0
+  starTime2: 0
+  starTime3: 0
+  star1: {fileID: 0}
+  star2: {fileID: 0}
+  star3: {fileID: 0}
   noCookie: {fileID: 21300000, guid: edd277cbb054820439cebf4a55a098c1, type: 3}
   yesCookie: {fileID: 21300000, guid: 974a1e2525e6ec04abe9931bcfdd4b83, type: 3}
-  nextLevel: Level2
+  nextLevel: Level3
   speed: 0
   oldSpeed: 0
   newSpeed: 0
@@ -1962,6 +1965,7 @@ MonoBehaviour:
   frisbee: {fileID: 9481782}
   anim: {fileID: 11100000, guid: 112f259daf2663745bb49d0f7cd2335a, type: 3}
   countDown: {fileID: 496187756}
+  endTime: {fileID: 0}
   timer: {fileID: 553819512}
   cookieSound: {fileID: 8300000, guid: 5b86efb8522179940ac58d17e95ce5e5, type: 3}
   finishSound: {fileID: 8300000, guid: 2961d704673a90f4c862652ba75edfc4, type: 3}
@@ -2211,7 +2215,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: aa6572023d03c9049b4ad4cb0f79b600, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: aa6572023d03c9049b4ad4cb0f79b600, type: 3}
       propertyPath: m_Name
@@ -2250,8 +2254,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.022132682, y: 0.010478836, z: 0.022132682}
-  m_Center: {x: 0, y: -0.00006261724, z: 0.0000000018626451}
+  m_Size: {x: 0.024722466, y: 0.01072423, z: 0.024717713}
+  m_Center: {x: 0.000078829005, y: 0.00006007978, z: -0.0000082015995}
 --- !u!1 &854053501 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: a0f6d2a93f2bf6e46b5e38b136ee3596, type: 3}
@@ -2266,8 +2270,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.14798926, y: 0.054291062, z: 0.07365211}
-  m_Center: {x: 0.23481658, y: 0.025276408, z: 0.004320425}
+  m_Size: {x: 0.14917292, y: 0.056356877, z: 0.07365211}
+  m_Center: {x: 0.23478618, y: 0.026309313, z: 0.004320425}
 --- !u!1 &894212016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2441,7 +2445,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
       propertyPath: m_Name
@@ -2467,6 +2471,10 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee55b81224cfaa4ea6a17defbbe9b32, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
   m_IsPrefabParent: 0
@@ -2484,8 +2492,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06820681, y: 0.06784398, z: 0.12726957}
-  m_Center: {x: -0.06761193, y: 0.045237545, z: 0.054181963}
+  m_Size: {x: 0.09092328, y: 0.09653745, z: 0.12964503}
+  m_Center: {x: -0.061556384, y: 0.03980844, z: 0.05299423}
 --- !u!1 &1047203074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,8 +2730,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.4338484, y: 2.7015963, z: 10.384777}
-  m_Center: {x: -0.0020971298, y: 2.4980645, z: 0.004992008}
+  m_Size: {x: 2.92784, y: 3.130496, z: 10.384777}
+  m_Center: {x: -0.0024297237, y: 2.7125144, z: 0.004992008}
 --- !u!1 &1101816912
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,7 +3448,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5bbb970d16b93e24887bf0f90c123b16, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5bbb970d16b93e24887bf0f90c123b16, type: 3}
       propertyPath: m_Name
@@ -3721,6 +3729,10 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee55b81224cfaa4ea6a17defbbe9b32, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
   m_IsPrefabParent: 0
@@ -3738,8 +3750,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.017459685, y: 0.009999999, z: 0.018785156}
-  m_Center: {x: -0.0014479501, y: 0, z: 0.00077674736}
+  m_Size: {x: 0.01959855, y: 0.01125869, z: 0.021310255}
+  m_Center: {x: -0.0010967089, y: 0.0006293456, z: 0.00035391914}
 --- !u!1001 &1401154507
 Prefab:
   m_ObjectHideFlags: 0
@@ -3777,7 +3789,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a0f6d2a93f2bf6e46b5e38b136ee3596, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a0f6d2a93f2bf6e46b5e38b136ee3596, type: 3}
       propertyPath: m_Name
@@ -4349,19 +4361,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5655942
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8246837
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
       propertyPath: m_Name
@@ -4383,6 +4395,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 92bbcbb606ad81e40a03dbcab48f0884, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fcfcd6a36c933e246bf540ca5d90b148, type: 3}
   m_IsPrefabParent: 0
@@ -5320,7 +5336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: aa6572023d03c9049b4ad4cb0f79b600, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: aa6572023d03c9049b4ad4cb0f79b600, type: 3}
       propertyPath: m_Name
@@ -5359,8 +5375,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.022132682, y: 0.010478836, z: 0.022132682}
-  m_Center: {x: 0, y: -0.00006261724, z: 0.0000000018626451}
+  m_Size: {x: 0.023990422, y: 0.011018956, z: 0.02526703}
+  m_Center: {x: 0.00030994267, y: 0.00020744205, z: 0.00031814576}
 --- !u!1 &1912422449 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
@@ -5375,8 +5391,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.4338484, y: 2.7015963, z: 10.384777}
-  m_Center: {x: -0.0020971298, y: 2.4980645, z: 0.004992008}
+  m_Size: {x: 2.8716075, y: 3.1363115, z: 10.384777}
+  m_Center: {x: -0.0021772385, y: 2.7154222, z: 0.004992008}
 --- !u!1 &1948989913
 GameObject:
   m_ObjectHideFlags: 0
