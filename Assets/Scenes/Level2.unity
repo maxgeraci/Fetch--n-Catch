@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f733b896d396449b0c4262d855f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Level1
+  scene: Level2
 --- !u!114 &49111386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f733b896d396449b0c4262d855f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Level2
+  scene: Level3
 --- !u!114 &197495231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +918,88 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 15, y: 245, z: 0}
+--- !u!1001 &302260347
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 281.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_Name
+      value: Fence
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1 &302260348 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 97b4c4bf1cf42c747b8a80f12752eacc, type: 3}
+  m_PrefabInternal: {fileID: 302260347}
+--- !u!65 &302260349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302260348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0838579, y: 0.069426574, z: 0.009056396}
+  m_Center: {x: -0.03332061, y: 0.035454687, z: 0.087805785}
 --- !u!1 &319883373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,7 +1497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f733b896d396449b0c4262d855f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Level1
+  scene: Level2
 --- !u!114 &550020704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4424,7 +4506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f733b896d396449b0c4262d855f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Level1
+  scene: Level2
 --- !u!114 &1703079770
 MonoBehaviour:
   m_ObjectHideFlags: 0

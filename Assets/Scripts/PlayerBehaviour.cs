@@ -17,13 +17,18 @@ public class PlayerBehaviour : MonoBehaviour
     bool stopTimerUI;
 
     int cookieCount;
+    string niceTime;
 
     public GameObject completedScreen;
     public GameObject tryAgainScreen;
 
-    public Image cookie1;
-    public Image cookie2;
-    public Image cookie3;
+    public int starTime1;
+    public int starTime2;
+    public int starTime3;
+
+    public Image star1;
+    public Image star2;
+    public Image star3;
 
     public Sprite noCookie;
     public Sprite yesCookie;
@@ -45,6 +50,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Text countDown;
     private int countDownInt;
+
+    public Text endTime;
 
     public Text timer;
     private int timerInt;
@@ -110,7 +117,7 @@ public class PlayerBehaviour : MonoBehaviour
             timerInt = (int)startTime;
             float minutes = Mathf.Floor(timerInt / 60F);
             float seconds = Mathf.Floor(timerInt - minutes * 60);
-            string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+            niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
             timer.text = niceTime;
         }
 
@@ -265,6 +272,8 @@ public class PlayerBehaviour : MonoBehaviour
             this.GetComponent<AudioSource>().clip = finishSound;
             this.GetComponent<AudioSource>().volume = 0.4f;
             this.GetComponent<AudioSource>().Play();
+            stopTimerUI = true;
+            endTime.text = niceTime;
             Time.timeScale = 0;
             CookieCounter();
             PlayerPrefs.SetInt(nextLevel, 2);
@@ -314,27 +323,33 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void CookieCounter()
     {
-        if (cookieCount == 0)
+        if (timerInt < starTime3)
         {
-            cookie1.sprite = noCookie;
-            cookie2.sprite = noCookie;
-            cookie3.sprite = noCookie;
-        } else if (cookieCount == 1)
+            Debug.Log("3 sterren");
+            star1.enabled = true;
+            star2.enabled = true;
+            star3.enabled = true;
+        }
+        else if (timerInt < starTime2)
         {
-            cookie1.sprite = yesCookie;
-            cookie2.sprite = noCookie;
-            cookie3.sprite = noCookie;
-        } else if (cookieCount == 2)
+            Debug.Log("2 sterren");
+            star1.enabled = true;
+            star2.enabled = true;
+            star3.enabled = false;
+        }
+        else if (timerInt < starTime1)
         {
-            cookie1.sprite = yesCookie;
-            cookie2.sprite = yesCookie;
-            cookie3.sprite = noCookie;
-
-        } else if (cookieCount == 3)
+            Debug.Log("1 ster");
+            star1.enabled = true;
+            star2.enabled = false;
+            star3.enabled = false;
+        }
+        else
         {
-            cookie1.sprite = yesCookie;
-            cookie2.sprite = yesCookie;
-            cookie3.sprite = yesCookie;
+            Debug.Log("Geen sterren");
+            star1.enabled = false;
+            star2.enabled = false;
+            star3.enabled = false;
         }
     }
 }
