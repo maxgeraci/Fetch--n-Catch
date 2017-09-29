@@ -33,6 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
     public Sprite noCookie;
     public Sprite yesCookie;
     public string nextLevel;
+    public string levelStars;
 
     private Vector3 dir;
     public float speed;
@@ -329,6 +330,8 @@ public class PlayerBehaviour : MonoBehaviour
             star1.enabled = true;
             star2.enabled = true;
             star3.enabled = true;
+
+            PlayerPrefs.SetInt(levelStars, 3);
         }
         else if (timerInt < starTime2)
         {
@@ -336,6 +339,11 @@ public class PlayerBehaviour : MonoBehaviour
             star1.enabled = true;
             star2.enabled = true;
             star3.enabled = false;
+
+            if (PlayerPrefs.GetInt(levelStars) == 1 || PlayerPrefs.GetInt(levelStars) == 0)
+            {
+                PlayerPrefs.SetInt(levelStars, 2);
+            }
         }
         else if (timerInt < starTime1)
         {
@@ -343,6 +351,11 @@ public class PlayerBehaviour : MonoBehaviour
             star1.enabled = true;
             star2.enabled = false;
             star3.enabled = false;
+
+            if (PlayerPrefs.GetInt(levelStars) == 0)
+            {
+                PlayerPrefs.SetInt(levelStars, 1);
+            }
         }
         else
         {
@@ -351,5 +364,11 @@ public class PlayerBehaviour : MonoBehaviour
             star2.enabled = false;
             star3.enabled = false;
         }
+
+        int totalStars = PlayerPrefs.GetInt("StarsLevel1") + PlayerPrefs.GetInt("StarsLevel2") + PlayerPrefs.GetInt("StarsLevel3") + PlayerPrefs.GetInt("StarsLevel4") + PlayerPrefs.GetInt("StarsLevel5") + PlayerPrefs.GetInt("StarsLevel6") + PlayerPrefs.GetInt("StarsLevel7") + PlayerPrefs.GetInt("StarsLevel8") + PlayerPrefs.GetInt("StarsLevel9") + PlayerPrefs.GetInt("StarsLevel10") + PlayerPrefs.GetInt("StarsLevel11") + PlayerPrefs.GetInt("StarsLevel12") + PlayerPrefs.GetInt("StarsLevel13") + PlayerPrefs.GetInt("StarsLevel14") + PlayerPrefs.GetInt("StarsLevel15") + PlayerPrefs.GetInt("StarsLevel16") + PlayerPrefs.GetInt("StarsLevel17") + PlayerPrefs.GetInt("StarsLevel18") + PlayerPrefs.GetInt("StarsLevel19") + PlayerPrefs.GetInt("StarsLevel20");
+
+        PlayerPrefs.SetInt("Stars", totalStars);
+
+        Debug.Log(PlayerPrefs.GetInt("Stars"));
     }
 }
