@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts\StarsBehaviour.cs" />
     <Compile Include="Assets\Scripts\SwitchSound.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
