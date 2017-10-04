@@ -16,15 +16,25 @@ public class PlayerBehaviour : MonoBehaviour
     bool stopTimer;
     bool stopTimerUI;
 
+    bool tapTimerBool;
+    float tapTimer = 5f;
+
     int cookieCount;
     string niceTime;
 
+    public Image bar;
+    private float barDistance;
+    public Image star;
+
+    private int stars;
+
     public GameObject completedScreen;
     public GameObject tryAgainScreen;
+    public GameObject tapScreen;
 
-    public int starTime1;
-    public int starTime2;
-    public int starTime3;
+    public Image video;
+
+    public int starTime;
 
     public Image star1;
     public Image star2;
@@ -68,6 +78,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Start()
     {
+        video.enabled = true;
         rigidBody = transform.GetComponent<Rigidbody>();
         anim = GetComponent<Animation>();
 
@@ -80,6 +91,9 @@ public class PlayerBehaviour : MonoBehaviour
         stopTimer = false;
         stopTimerUI = true;
         gameOver = false;
+        tapTimerBool = false;
+
+        stars = 0;
 
         oldSpeed = 0;
 
@@ -100,15 +114,20 @@ public class PlayerBehaviour : MonoBehaviour
         {
             timeLeft -= Time.deltaTime;
             countDownInt = (int)timeLeft;
-            countDown.text = countDownInt.ToString();
+            countDown.text = "GO!";
         }
         if (timeLeft < 1)
         {
+            video.enabled = false;
             onRunning = true;
             canJump = true;
+            stopTimerUI = false;
+        }
+
+        if (timeLeft < 0.5)
+        {
             timeLeft = 1;
             stopTimer = true;
-            stopTimerUI = false;
             countDown.enabled = false;
         }
 
@@ -178,11 +197,40 @@ public class PlayerBehaviour : MonoBehaviour
         //    speed = 9.5f;
         //    anim["Run"].speed = 2.5f;
         //}
+
+        if (tapTimerBool)
+        {
+            tapTimer -= Time.deltaTime;
+        }
+
+        if (tapTimer < 0)
+        {
+            tapTimer = 1;
+            tapTimerBool = false;
+            tapScreen.SetActive(false);
+            StarCounter();
+            completedScreen.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
     {
         rigidBody.AddForce(Physics.gravity * rigidBody.mass * 2.5f);
+    }
+
+    public void TapForStar()
+    {
+        star.transform.position = new Vector2(star.transform.position.x + (bar.GetComponent<Collider>().bounds.size.x * 0.04f), star.transform.position.y);
+
+        if (star.transform.position.x > Screen.width / 2 + bar.GetComponent<Collider>().bounds.size.x / 2)
+        {
+            tapTimerBool = false;
+            tapScreen.SetActive(false);
+            stars += 1;
+            Debug.Log("+1");
+            StarCounter();
+            completedScreen.SetActive(true);
+        }
     }
 
     public void Run()
@@ -270,15 +318,23 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Frisbee"))
         {
-            this.GetComponent<AudioSource>().clip = finishSound;
-            this.GetComponent<AudioSource>().volume = 0.4f;
-            this.GetComponent<AudioSource>().Play();
+            //this.GetComponent<AudioSource>().clip = finishSound;
+            //this.GetComponent<AudioSource>().volume = 0.4f;
+            //this.GetComponent<AudioSource>().Play();
             stopTimerUI = true;
             endTime.text = niceTime;
-            Time.timeScale = 0;
-            CookieCounter();
+            frisbee.SetActive(false);
             PlayerPrefs.SetInt(nextLevel, 2);
-            completedScreen.SetActive(true);
+            stars += 1;
+            Debug.Log("+1");
+
+            if (timerInt < starTime)
+            {
+                stars += 1;
+                Debug.Log("+1");
+            }
+            tapScreen.SetActive(true);
+            tapTimerBool = true;
         }
     }
 
@@ -313,56 +369,36 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    private bool IsPointerOverUIObject()
+    public void StarCounter()
     {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
-    }
-
-    public void CookieCounter()
-    {
-        if (timerInt < starTime3)
+        if (stars == 1)
         {
-            Debug.Log("3 sterren");
             star1.enabled = true;
-            star2.enabled = true;
-            star3.enabled = true;
+            star2.enabled = false;
+            star3.enabled = false;
 
-            PlayerPrefs.SetInt(levelStars, 3);
-        }
-        else if (timerInt < starTime2)
+            PlayerPrefs.SetInt(levelStars, 1);
+        } else if (stars == 2)
         {
-            Debug.Log("2 sterren");
             star1.enabled = true;
             star2.enabled = true;
             star3.enabled = false;
 
-            if (PlayerPrefs.GetInt(levelStars) == 1 || PlayerPrefs.GetInt(levelStars) == 0)
+            if (PlayerPrefs.GetInt(levelStars) == 0 || PlayerPrefs.GetInt(levelStars) == 1)
             {
                 PlayerPrefs.SetInt(levelStars, 2);
             }
         }
-        else if (timerInt < starTime1)
+        else if (stars == 3)
         {
-            Debug.Log("1 ster");
             star1.enabled = true;
-            star2.enabled = false;
-            star3.enabled = false;
+            star2.enabled = true;
+            star3.enabled = true;
 
-            if (PlayerPrefs.GetInt(levelStars) == 0)
+            if (PlayerPrefs.GetInt(levelStars) == 0 || PlayerPrefs.GetInt(levelStars) == 1 || PlayerPrefs.GetInt(levelStars) == 2)
             {
-                PlayerPrefs.SetInt(levelStars, 1);
+                PlayerPrefs.SetInt(levelStars, 3);
             }
-        }
-        else
-        {
-            Debug.Log("Geen sterren");
-            star1.enabled = false;
-            star2.enabled = false;
-            star3.enabled = false;
         }
 
         int totalStars = PlayerPrefs.GetInt("StarsLevel1") + PlayerPrefs.GetInt("StarsLevel2") + PlayerPrefs.GetInt("StarsLevel3") + PlayerPrefs.GetInt("StarsLevel4") + PlayerPrefs.GetInt("StarsLevel5") + PlayerPrefs.GetInt("StarsLevel6") + PlayerPrefs.GetInt("StarsLevel7") + PlayerPrefs.GetInt("StarsLevel8") + PlayerPrefs.GetInt("StarsLevel9") + PlayerPrefs.GetInt("StarsLevel10") + PlayerPrefs.GetInt("StarsLevel11") + PlayerPrefs.GetInt("StarsLevel12") + PlayerPrefs.GetInt("StarsLevel13") + PlayerPrefs.GetInt("StarsLevel14") + PlayerPrefs.GetInt("StarsLevel15") + PlayerPrefs.GetInt("StarsLevel16") + PlayerPrefs.GetInt("StarsLevel17") + PlayerPrefs.GetInt("StarsLevel18") + PlayerPrefs.GetInt("StarsLevel19") + PlayerPrefs.GetInt("StarsLevel20");

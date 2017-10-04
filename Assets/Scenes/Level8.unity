@@ -3999,11 +3999,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdde3f58dc158114a9d1be371b3467eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bar: {fileID: 0}
+  star: {fileID: 0}
   completedScreen: {fileID: 171279148}
   tryAgainScreen: {fileID: 1171235174}
-  starTime1: 25
-  starTime2: 20
-  starTime3: 15
+  tapScreen: {fileID: 0}
+  video: {fileID: 0}
+  starTime: 0
   star1: {fileID: 2036730310}
   star2: {fileID: 1413591714}
   star3: {fileID: 331920069}

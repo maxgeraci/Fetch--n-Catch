@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps.unity
     guid: 428bf4af511d2af4bad8c5c84955fd73
   - enabled: 1
-    path: Assets/Scenes/Levels Park.unity
+    path: Assets/Scenes/Levels.unity
     guid: 09bf3d6ce0194a94ebc710e47e7303b0
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
@@ -21,11 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: 98f7fdf830fd9154ab616836ac8b567a
   - enabled: 1
-    path: Assets/Scenes/Level2_backup.unity
-    guid: 7998e15dd7b41b545814f08573d4983f
+    path: Assets/Scenes/Level2.unity
+    guid: 5eb46da58ea96154cb6b03a6854f5dcc
   - enabled: 1
-    path: Assets/Scenes/Level6.unity
-    guid: ef45a3718f15c7b419318e0c1b138dee
+    path: Assets/Scenes/Level3.unity
+    guid: b076733726a6d5b478d87db3a52fb682
   - enabled: 1
     path: Assets/Scenes/Level4.unity
     guid: 4db617517efacce40babaf9e94408334
@@ -33,8 +33,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level5.unity
     guid: 073d6a34a9a61434a8b9e71895316f8d
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
-    guid: b076733726a6d5b478d87db3a52fb682
+    path: Assets/Scenes/Level6.unity
+    guid: ef45a3718f15c7b419318e0c1b138dee
   - enabled: 1
     path: Assets/Scenes/Level7.unity
     guid: 35e6094630b294b4fb462285d34f6603
@@ -50,6 +50,3 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 48b2c83ddf717cd479a43cd413a2b83f
-  - enabled: 1
-    path: Assets/Scenes/Level1_backup.unity
-    guid: b36b86dd5582dd249bc3462014e2be0c
