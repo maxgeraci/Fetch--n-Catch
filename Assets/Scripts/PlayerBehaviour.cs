@@ -40,8 +40,6 @@ public class PlayerBehaviour : MonoBehaviour
     public Image star2;
     public Image star3;
 
-    public Sprite noCookie;
-    public Sprite yesCookie;
     public string nextLevel;
     public string levelStars;
 
@@ -220,7 +218,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TapForStar()
     {
-        star.transform.position = new Vector2(star.transform.position.x + (bar.GetComponent<Collider>().bounds.size.x * 0.04f), star.transform.position.y);
+        star.transform.position = new Vector2(star.transform.position.x + (bar.GetComponent<Collider>().bounds.size.x * 0.03f), star.transform.position.y);
 
         if (star.transform.position.x > Screen.width / 2 + bar.GetComponent<Collider>().bounds.size.x / 2)
         {
