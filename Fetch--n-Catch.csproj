@@ -82,11 +82,16 @@
     <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\CameraMenuBehaviour.cs" />
     <Compile Include="Assets\Scripts\Fader.cs" />
+    <Compile Include="Assets\Scripts\FirstTime.cs" />
     <Compile Include="Assets\Scripts\FrisbeeBehaviour.cs" />
     <Compile Include="Assets\Scripts\Initiate.cs" />
     <Compile Include="Assets\Scripts\LoadLevel.cs" />
+    <Compile Include="Assets\Scripts\LoadLevel1.cs" />
+    <Compile Include="Assets\Scripts\LoadMap.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\LoadScreen.cs" />
+    <Compile Include="Assets\Scripts\LoadSpikeyOutfits.cs" />
+    <Compile Include="Assets\Scripts\LoadStars.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\ProgressBar.cs" />
