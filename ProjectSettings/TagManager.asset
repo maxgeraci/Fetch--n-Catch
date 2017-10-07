@@ -12,6 +12,7 @@ TagManager:
   - Background Music
   - Canvas
   - Invisible
+  - Slowdown
   layers:
   - Default
   - TransparentFX

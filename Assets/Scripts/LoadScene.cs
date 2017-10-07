@@ -22,9 +22,4 @@ public class LoadScene : MonoBehaviour {
         //SceneManager.LoadScene(scene);
         Initiate.Fade(scene, Color.white, 3.0f);
     }
-
-    public void LinkURL()
-    {
-        Application.OpenURL("https://play.google.com/store/apps/details?id=com.SpicyTuna");
-    }
 }

@@ -54,6 +54,8 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject frisbee;
     public Animation anim;
 
+    bool slowdown;
+
     private bool boost;
     private bool gameOver;
 
@@ -85,6 +87,8 @@ public class PlayerBehaviour : MonoBehaviour
         onRunning = false;
         canJump = false;
         boost = false;
+
+        slowdown = false;
 
         stopTimer = false;
         stopTimerUI = true;
@@ -153,11 +157,17 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
-        if (speed > 0)
+        if (speed > 0 && !slowdown)
         {
-            newSpeed -= 0.06f;
+            newSpeed -= 0.06f; ;
             speed = oldSpeed + newSpeed;
-        } else
+        } else if (speed > 0 && slowdown)
+        {
+            newSpeed -= 0.06f; ;
+            speed = oldSpeed + newSpeed;
+            slowdown = false;
+        }
+        else
         {
             speed = 0;
         }
@@ -338,25 +348,47 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Collectable"))
+        if (other.gameObject.CompareTag("Boost"))
         {
             Destroy(other.gameObject);
             this.GetComponent<AudioSource>().clip = cookieSound;
             this.GetComponent<AudioSource>().volume = 0.6f;
             this.GetComponent<AudioSource>().Play();
-            cookieCount++;
+            boost = true;
+            newSpeed += 5;
         }
 
-        //if (other.gameObject.CompareTag("Boost"))
-        //{
-        //    Destroy(other.gameObject);
-        //    this.GetComponent<AudioSource>().clip = cookieSound;
-        //    this.GetComponent<AudioSource>().volume = 0.6f;
-        //    this.GetComponent<AudioSource>().Play();
-        //    boost = true;
-        //    speed = 10.4f;
-        //    anim["Run"].speed = 3.5f;
-        //}
+        if (other.gameObject.CompareTag("Slowdown"))
+        {
+            Destroy(other.gameObject);
+            this.GetComponent<AudioSource>().clip = cookieSound;
+            this.GetComponent<AudioSource>().volume = 0.6f;
+            this.GetComponent<AudioSource>().Play();
+            slowdown = true;
+            if (newSpeed - 5 > 1)
+            {
+                newSpeed -= 5;
+            }
+            else if (newSpeed - 5 <= 1 && newSpeed - 5 > 0)
+            {
+                newSpeed -= 4;
+            } else if (newSpeed - 5 <= 0 && newSpeed - 5 > -1)
+            {
+                newSpeed -= 3;
+            }
+            else if (newSpeed - 5 <= -1 && newSpeed - 5 > -2)
+            {
+                newSpeed -= 2;
+            }
+            else if (newSpeed - 5 <= -2 && newSpeed - 5 > -3)
+            {
+                newSpeed -= 1;
+            }
+            else
+            {
+                newSpeed -= 0;
+            }
+        }
     }
 
     private void OnCollisionExit(Collision collision)

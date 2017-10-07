@@ -9,6 +9,13 @@ public class StarsBehaviour : MonoBehaviour {
         if (!PlayerPrefs.HasKey("Stars"))
         {
             PlayerPrefs.SetInt("Stars", 0);
+
+            PlayerPrefs.SetInt("Spikey1", 2);
+            PlayerPrefs.SetInt("Spikey2", 0);
+            PlayerPrefs.SetInt("Spikey3", 0);
+            PlayerPrefs.SetInt("Spikey4", 0);
+            PlayerPrefs.SetInt("Spikey5", 0);
+            PlayerPrefs.SetInt("Spikey6", 0);
         }
 
         if (!PlayerPrefs.HasKey("StarsLevel1"))
