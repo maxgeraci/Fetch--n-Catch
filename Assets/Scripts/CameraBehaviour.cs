@@ -4,12 +4,48 @@ using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour {
 
-    public GameObject player;
+    private GameObject player;
+    public GameObject playerCustom1;
+    public GameObject playerCustom2;
+    public GameObject playerCustom3;
+    public GameObject playerCustom4;
+    public GameObject playerCustom5;
+    public GameObject playerCustom6;
     private Vector3 offset;
 
     // Use this for initialization
     void Start()
     {
+        if (PlayerPrefs.GetInt("Spikey1") == 2)
+        {
+            player = playerCustom1;
+            playerCustom1.SetActive(true);
+        } else if (PlayerPrefs.GetInt("Spikey2") == 2)
+        {
+            player = playerCustom2;
+            playerCustom2.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Spikey3") == 2)
+        {
+            player = playerCustom3;
+            playerCustom3.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Spikey4") == 2)
+        {
+            player = playerCustom4;
+            playerCustom4.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Spikey5") == 2)
+        {
+            player = playerCustom5;
+            playerCustom5.SetActive(true);
+        }
+        else if (PlayerPrefs.GetInt("Spikey6") == 2)
+        {
+            player = playerCustom6;
+            playerCustom6.SetActive(true);
+        }
+
         offset = transform.position - player.transform.position;
 
         // set the desired aspect ratio (the values in this example are

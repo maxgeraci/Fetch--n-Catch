@@ -12,14 +12,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     float timeLeft = 4f;
     float startTime;
-    //float boostTime = 3f;
     bool stopTimer;
     bool stopTimerUI;
 
     bool tapTimerBool;
     float tapTimer = 5f;
 
-    int cookieCount;
     string niceTime;
 
     public Image bar;
@@ -60,16 +58,20 @@ public class PlayerBehaviour : MonoBehaviour
     private bool gameOver;
 
     public Text countDown;
-    private int countDownInt;
 
     public Text endTime;
 
     public Text timer;
     private int timerInt;
 
-    public AudioClip cookieSound;
-    public AudioClip finishSound;
+    public AudioClip boostSound;
+    public AudioClip slowDownSound;
+    public AudioClip quickTimeSound;
     public AudioClip tryAgainSound;
+    public AudioClip jumpSound;
+    public AudioClip countDownSound;
+    public AudioClip countDownGoSound;
+    public AudioClip levelCompleteSound;
 
     private float startTouchPosition;
     private float endTouchPosition;
@@ -99,7 +101,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         oldSpeed = 0;
 
-        cookieCount = 0;
         this.gameObject.AddComponent<AudioSource>();
 
         anim["Run"].speed = 0f;
@@ -115,8 +116,35 @@ public class PlayerBehaviour : MonoBehaviour
         if (!stopTimer)
         {
             timeLeft -= Time.deltaTime;
-            countDownInt = (int)timeLeft;
             countDown.text = "GO!";
+
+            if (timeLeft < 4 && timeLeft > 3.9)
+            {
+                this.GetComponent<AudioSource>().clip = countDownSound;
+                this.GetComponent<AudioSource>().volume = 0.1f;
+                this.GetComponent<AudioSource>().Play();
+            }
+
+            if (timeLeft < 3 && timeLeft > 2.9)
+            {
+                this.GetComponent<AudioSource>().clip = countDownSound;
+                this.GetComponent<AudioSource>().volume = 0.1f;
+                this.GetComponent<AudioSource>().Play();
+            }
+
+            if (timeLeft < 2 && timeLeft > 1.9)
+            {
+                this.GetComponent<AudioSource>().clip = countDownSound;
+                this.GetComponent<AudioSource>().volume = 0.1f;
+                this.GetComponent<AudioSource>().Play();
+            }
+
+            if (timeLeft < 1 && timeLeft > 0.9)
+            {
+                this.GetComponent<AudioSource>().clip = countDownGoSound;
+                this.GetComponent<AudioSource>().volume = 0.2f;
+                this.GetComponent<AudioSource>().Play();
+            }
         }
         if (timeLeft < 1)
         {
@@ -184,7 +212,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (!gameOver)
             {
                 this.GetComponent<AudioSource>().clip = tryAgainSound;
-                this.GetComponent<AudioSource>().volume = 0.7f;
+                this.GetComponent<AudioSource>().volume = 0.3f;
                 this.GetComponent<AudioSource>().Play();
                 gameOver = true;
             }
@@ -213,8 +241,8 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (tapTimer < 0)
         {
-            tapTimer = 1;
             tapTimerBool = false;
+            tapTimer = 1;
             tapScreen.SetActive(false);
             StarCounter();
             completedScreen.SetActive(true);
@@ -228,16 +256,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TapForStar()
     {
-        star.transform.position = new Vector2(star.transform.position.x + (bar.GetComponent<Collider>().bounds.size.x * 0.03f), star.transform.position.y);
-
-        if (star.transform.position.x > Screen.width / 2 + bar.GetComponent<Collider>().bounds.size.x / 2)
+        if (this.isActiveAndEnabled)
         {
-            tapTimerBool = false;
-            tapScreen.SetActive(false);
-            stars += 1;
-            Debug.Log("+1");
-            StarCounter();
-            completedScreen.SetActive(true);
+            star.transform.position = new Vector2(star.transform.position.x + (bar.GetComponent<Collider>().bounds.size.x * 0.03f), star.transform.position.y);
+
+            if (star.transform.position.x > Screen.width / 2 + bar.GetComponent<Collider>().bounds.size.x / 2)
+            {
+                tapTimerBool = false;
+                tapScreen.SetActive(false);
+                stars += 1;
+                Debug.Log("+1");
+                StarCounter();
+                completedScreen.SetActive(true);
+            }
         }
     }
 
@@ -254,6 +285,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (onGround && canJump)
         {
+            this.GetComponent<AudioSource>().clip = jumpSound;
+            this.GetComponent<AudioSource>().volume = 0.1f;
+            this.GetComponent<AudioSource>().Play();
+
             rigidBody.velocity += jumpHeight * Vector3.up;
             rigidBody.GetComponent<Animation>().Play("Jump");
             onGround = false;
@@ -326,9 +361,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Frisbee"))
         {
-            //this.GetComponent<AudioSource>().clip = finishSound;
-            //this.GetComponent<AudioSource>().volume = 0.4f;
-            //this.GetComponent<AudioSource>().Play();
+            this.GetComponent<AudioSource>().clip = quickTimeSound;
+            this.GetComponent<AudioSource>().volume = 0.1f;
+            this.GetComponent<AudioSource>().Play();
             stopTimerUI = true;
             endTime.text = niceTime;
             frisbee.SetActive(false);
@@ -351,8 +386,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Boost"))
         {
             Destroy(other.gameObject);
-            this.GetComponent<AudioSource>().clip = cookieSound;
-            this.GetComponent<AudioSource>().volume = 0.6f;
+            this.GetComponent<AudioSource>().clip = boostSound;
+            this.GetComponent<AudioSource>().volume = 0.1f;
             this.GetComponent<AudioSource>().Play();
             boost = true;
             newSpeed += 5;
@@ -361,8 +396,8 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Slowdown"))
         {
             Destroy(other.gameObject);
-            this.GetComponent<AudioSource>().clip = cookieSound;
-            this.GetComponent<AudioSource>().volume = 0.6f;
+            this.GetComponent<AudioSource>().clip = slowDownSound;
+            this.GetComponent<AudioSource>().volume = 0.1f;
             this.GetComponent<AudioSource>().Play();
             slowdown = true;
             if (newSpeed - 5 > 1)
@@ -407,12 +442,18 @@ public class PlayerBehaviour : MonoBehaviour
             star2.enabled = false;
             star3.enabled = false;
 
-            PlayerPrefs.SetInt(levelStars, 1);
+            if (PlayerPrefs.GetInt(levelStars) == 0 || PlayerPrefs.GetInt(levelStars) == 1 || PlayerPrefs.GetInt(levelStars) == 2)
+            {
+                PlayerPrefs.SetInt(levelStars, 1);
+            }
+            Debug.Log("1");
         } else if (stars == 2)
         {
             star1.enabled = true;
             star2.enabled = true;
             star3.enabled = false;
+
+            Debug.Log("2");
 
             if (PlayerPrefs.GetInt(levelStars) == 0 || PlayerPrefs.GetInt(levelStars) == 1)
             {
@@ -425,10 +466,9 @@ public class PlayerBehaviour : MonoBehaviour
             star2.enabled = true;
             star3.enabled = true;
 
-            if (PlayerPrefs.GetInt(levelStars) == 0 || PlayerPrefs.GetInt(levelStars) == 1 || PlayerPrefs.GetInt(levelStars) == 2)
-            {
-                PlayerPrefs.SetInt(levelStars, 3);
-            }
+            Debug.Log("3");
+
+            PlayerPrefs.SetInt(levelStars, 3);
         }
 
         int totalStars = PlayerPrefs.GetInt("StarsLevel1") + PlayerPrefs.GetInt("StarsLevel2") + PlayerPrefs.GetInt("StarsLevel3") + PlayerPrefs.GetInt("StarsLevel4") + PlayerPrefs.GetInt("StarsLevel5") + PlayerPrefs.GetInt("StarsLevel6") + PlayerPrefs.GetInt("StarsLevel7") + PlayerPrefs.GetInt("StarsLevel8") + PlayerPrefs.GetInt("StarsLevel9") + PlayerPrefs.GetInt("StarsLevel10") + PlayerPrefs.GetInt("StarsLevel11") + PlayerPrefs.GetInt("StarsLevel12") + PlayerPrefs.GetInt("StarsLevel13") + PlayerPrefs.GetInt("StarsLevel14") + PlayerPrefs.GetInt("StarsLevel15") + PlayerPrefs.GetInt("StarsLevel16") + PlayerPrefs.GetInt("StarsLevel17") + PlayerPrefs.GetInt("StarsLevel18") + PlayerPrefs.GetInt("StarsLevel19") + PlayerPrefs.GetInt("StarsLevel20");

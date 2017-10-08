@@ -15,6 +15,13 @@ public class ProgressBar : MonoBehaviour
     public GameObject frisbee;
     public GameObject frisbeeBall;
 
+    public GameObject playerCustom1;
+    public GameObject playerCustom2;
+    public GameObject playerCustom3;
+    public GameObject playerCustom4;
+    public GameObject playerCustom5;
+    public GameObject playerCustom6;
+
     private float playerSpeed;
     private float playerBallSpeed;
     private float frisbeeSpeed;
@@ -36,6 +43,31 @@ public class ProgressBar : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (PlayerPrefs.GetInt("Spikey1") == 2)
+        {
+            player = playerCustom1;
+        }
+        else if (PlayerPrefs.GetInt("Spikey2") == 2)
+        {
+            player = playerCustom2;
+        }
+        else if (PlayerPrefs.GetInt("Spikey3") == 2)
+        {
+            player = playerCustom3;
+        }
+        else if (PlayerPrefs.GetInt("Spikey4") == 2)
+        {
+            player = playerCustom4;
+        }
+        else if (PlayerPrefs.GetInt("Spikey5") == 2)
+        {
+            player = playerCustom5;
+        }
+        else if (PlayerPrefs.GetInt("Spikey6") == 2)
+        {
+            player = playerCustom6;
+        }
+
         this.gameObject.AddComponent<AudioSource>();
 
         totalDistance = platform.GetComponent<Collider>().bounds.size.z;
@@ -64,7 +96,7 @@ public class ProgressBar : MonoBehaviour
             if (!gameOver)
             {
                 this.GetComponent<AudioSource>().clip = tryAgainSound;
-                this.GetComponent<AudioSource>().volume = 0.7f;
+                this.GetComponent<AudioSource>().volume = 0.3f;
                 this.GetComponent<AudioSource>().Play();
                 gameOver = true;
             }
