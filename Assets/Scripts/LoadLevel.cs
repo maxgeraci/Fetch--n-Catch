@@ -33,7 +33,7 @@ public class LoadLevel : MonoBehaviour {
                 image.sprite = locked;
             }
         }
-        else if (PlayerPrefs.GetInt(level) == 1)
+        else if (PlayerPrefs.GetInt(level) == 1 || PlayerPrefs.GetInt(level) == 0)
         {
             image.sprite = locked;
             image.GetComponent<EventTrigger>().enabled = false;

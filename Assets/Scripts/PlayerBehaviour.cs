@@ -265,7 +265,6 @@ public class PlayerBehaviour : MonoBehaviour
                 tapTimerBool = false;
                 tapScreen.SetActive(false);
                 stars += 1;
-                Debug.Log("+1");
                 StarCounter();
                 completedScreen.SetActive(true);
             }
@@ -325,6 +324,11 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            onGround = true;
+        }
+
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             //if (!boost)
@@ -369,12 +373,10 @@ public class PlayerBehaviour : MonoBehaviour
             frisbee.SetActive(false);
             PlayerPrefs.SetInt(nextLevel, 2);
             stars += 1;
-            Debug.Log("+1");
 
             if (timerInt < starTime)
             {
                 stars += 1;
-                Debug.Log("+1");
             }
             tapScreen.SetActive(true);
             tapTimerBool = true;
@@ -446,14 +448,11 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 PlayerPrefs.SetInt(levelStars, 1);
             }
-            Debug.Log("1");
         } else if (stars == 2)
         {
             star1.enabled = true;
             star2.enabled = true;
             star3.enabled = false;
-
-            Debug.Log("2");
 
             if (PlayerPrefs.GetInt(levelStars) == 0 || PlayerPrefs.GetInt(levelStars) == 1)
             {
@@ -466,15 +465,11 @@ public class PlayerBehaviour : MonoBehaviour
             star2.enabled = true;
             star3.enabled = true;
 
-            Debug.Log("3");
-
             PlayerPrefs.SetInt(levelStars, 3);
         }
 
         int totalStars = PlayerPrefs.GetInt("StarsLevel1") + PlayerPrefs.GetInt("StarsLevel2") + PlayerPrefs.GetInt("StarsLevel3") + PlayerPrefs.GetInt("StarsLevel4") + PlayerPrefs.GetInt("StarsLevel5") + PlayerPrefs.GetInt("StarsLevel6") + PlayerPrefs.GetInt("StarsLevel7") + PlayerPrefs.GetInt("StarsLevel8") + PlayerPrefs.GetInt("StarsLevel9") + PlayerPrefs.GetInt("StarsLevel10") + PlayerPrefs.GetInt("StarsLevel11") + PlayerPrefs.GetInt("StarsLevel12") + PlayerPrefs.GetInt("StarsLevel13") + PlayerPrefs.GetInt("StarsLevel14") + PlayerPrefs.GetInt("StarsLevel15") + PlayerPrefs.GetInt("StarsLevel16") + PlayerPrefs.GetInt("StarsLevel17") + PlayerPrefs.GetInt("StarsLevel18") + PlayerPrefs.GetInt("StarsLevel19") + PlayerPrefs.GetInt("StarsLevel20");
 
         PlayerPrefs.SetInt("Stars", totalStars);
-
-        Debug.Log(PlayerPrefs.GetInt("Stars"));
     }
 }

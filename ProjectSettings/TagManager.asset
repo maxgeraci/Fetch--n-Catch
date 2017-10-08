@@ -13,6 +13,7 @@ TagManager:
   - Canvas
   - Invisible
   - Slowdown
+  - Platform
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,7 @@ public class LoadMap : MonoBehaviour {
         {
             image.sprite = unLocked;
             image.GetComponent<EventTrigger>().enabled = true;
-        } else if (PlayerPrefs.GetInt("Level6") == 1)
+        } else if (PlayerPrefs.GetInt("Level6") == 1 || PlayerPrefs.GetInt("Level6") == 0)
         {
             image.GetComponent<EventTrigger>().enabled = false;
         }

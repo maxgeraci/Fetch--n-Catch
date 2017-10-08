@@ -57,14 +57,6 @@ public class LoadStars : MonoBehaviour {
                 PlayerPrefs.SetInt("Spikey6", 1);
             }
         }
-
-        Debug.Log(amountStars);
-        Debug.Log(PlayerPrefs.GetInt("Spikey1"));
-        Debug.Log(PlayerPrefs.GetInt("Spikey2"));
-        Debug.Log(PlayerPrefs.GetInt("Spikey3"));
-        Debug.Log(PlayerPrefs.GetInt("Spikey4"));
-        Debug.Log(PlayerPrefs.GetInt("Spikey5"));
-        Debug.Log(PlayerPrefs.GetInt("Spikey6"));
     }
 
     // Update is called once per frame

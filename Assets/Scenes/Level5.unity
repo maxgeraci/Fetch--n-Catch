@@ -577,6 +577,7 @@ GameObject:
   - component: {fileID: 39921435}
   - component: {fileID: 39921434}
   - component: {fileID: 39921433}
+  - component: {fileID: 39921436}
   m_Layer: 5
   m_Name: Run Button
   m_TagString: Untagged
@@ -720,6 +721,47 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 39921431}
+--- !u!114 &39921436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 39921431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &47671537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1422,10 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: fb2821fd5e97bf646bcc9badc2fe8cd9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 92bbcbb606ad81e40a03dbcab48f0884, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb2821fd5e97bf646bcc9badc2fe8cd9, type: 3}
   m_IsPrefabParent: 0
@@ -1444,7 +1490,7 @@ Animator:
   m_GameObject: {fileID: 223931661}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 86b526a422f047e4ebb703ea020c5382, type: 2}
+  m_Controller: {fileID: 9100000, guid: ad7110d76bdfa474391a86fae935d25d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1477,7 +1523,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6a44bff1f27a3634fa11bd83cd028591, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4050179309a68340ba8dc4f928cc675, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2239,7 +2285,7 @@ MonoBehaviour:
   tryAgainScreen: {fileID: 258754762}
   tapScreen: {fileID: 72310653}
   video: {fileID: 223931665}
-  starTime: 30
+  starTime: 25
   star1: {fileID: 1773585597}
   star2: {fileID: 1228866017}
   star3: {fileID: 1965257393}
@@ -2974,7 +3020,7 @@ MonoBehaviour:
   tryAgainScreen: {fileID: 258754762}
   tapScreen: {fileID: 72310653}
   video: {fileID: 223931665}
-  starTime: 30
+  starTime: 25
   star1: {fileID: 1773585597}
   star2: {fileID: 1228866017}
   star3: {fileID: 1965257393}
@@ -3389,7 +3435,7 @@ MonoBehaviour:
   tryAgainScreen: {fileID: 258754762}
   tapScreen: {fileID: 72310653}
   video: {fileID: 223931665}
-  starTime: 30
+  starTime: 25
   star1: {fileID: 1773585597}
   star2: {fileID: 1228866017}
   star3: {fileID: 1965257393}
@@ -3566,6 +3612,10 @@ Prefab:
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: fb2821fd5e97bf646bcc9badc2fe8cd9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 92bbcbb606ad81e40a03dbcab48f0884, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb2821fd5e97bf646bcc9badc2fe8cd9, type: 3}
   m_IsPrefabParent: 0
@@ -4570,7 +4620,7 @@ MonoBehaviour:
   tryAgainScreen: {fileID: 258754762}
   tapScreen: {fileID: 72310653}
   video: {fileID: 223931665}
-  starTime: 30
+  starTime: 25
   star1: {fileID: 1773585597}
   star2: {fileID: 1228866017}
   star3: {fileID: 1965257393}
@@ -4748,6 +4798,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee55b81224cfaa4ea6a17defbbe9b32, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
   m_IsPrefabParent: 0
@@ -5339,6 +5393,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: d33f669b07983a3408f425dc3ba56451, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bd301553750ded4a8d91c981890ba7f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d33f669b07983a3408f425dc3ba56451, type: 3}
   m_IsPrefabParent: 0
@@ -5535,6 +5593,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee55b81224cfaa4ea6a17defbbe9b32, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
   m_IsPrefabParent: 0
@@ -6859,6 +6921,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee55b81224cfaa4ea6a17defbbe9b32, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
   m_IsPrefabParent: 0
@@ -7047,7 +7113,7 @@ MonoBehaviour:
   tryAgainScreen: {fileID: 258754762}
   tapScreen: {fileID: 72310653}
   video: {fileID: 223931665}
-  starTime: 30
+  starTime: 25
   star1: {fileID: 1773585597}
   star2: {fileID: 1228866017}
   star3: {fileID: 1965257393}
@@ -8757,7 +8823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26152e5249f1c849a5ff83739c9d4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9.3
+  speed: 9.5
 --- !u!65 &2019479005
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8791,7 +8857,7 @@ MonoBehaviour:
   tryAgainScreen: {fileID: 258754762}
   tapScreen: {fileID: 72310653}
   video: {fileID: 223931665}
-  starTime: 30
+  starTime: 25
   star1: {fileID: 1773585597}
   star2: {fileID: 1228866017}
   star3: {fileID: 1965257393}
@@ -8852,6 +8918,7 @@ GameObject:
   - component: {fileID: 2083203932}
   - component: {fileID: 2083203931}
   - component: {fileID: 2083203930}
+  - component: {fileID: 2083203933}
   m_Layer: 5
   m_Name: Jump Button
   m_TagString: Untagged
@@ -8995,6 +9062,47 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2083203928}
+--- !u!114 &2083203933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2083203928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2094471993 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 439b087046e32d54384574c22a0f746c, type: 3}
