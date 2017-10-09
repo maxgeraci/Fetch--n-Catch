@@ -6,7 +6,6 @@ public class StarsBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Stars"))
         {
             PlayerPrefs.SetInt("Stars", 0);
